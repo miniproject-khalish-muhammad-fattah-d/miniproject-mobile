@@ -24,14 +24,14 @@ jobs:
       - name: Mobile Test Register
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: java -cp target/classes Register.java
+          run: java Register.java
 
       - name: Mobile Test Login
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: java -cp target/classes Login.java
+          run: java Login.java
 
       - name: Mobile Test AddToCart
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: java -cp target/classes AddToCart.java
+          run: java AddToCart.java
