@@ -1,0 +1,37 @@
+name: Mobile Test via GitHub Actions
+
+on: {push}
+
+jobs:
+  testmobile:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up JDK 17
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+
+      - name: Cache the maven packages to speed up build
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Mobile Test Register
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: java -cp target/classes Register.java
+
+      - name: Mobile Test Login
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: java -cp target/classes Login.java
+
+      - name: Mobile Test AddToCart
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: java -cp target/classes AddToCart.java
